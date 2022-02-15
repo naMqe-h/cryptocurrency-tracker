@@ -1,12 +1,19 @@
-import { AllCurrencies } from "./components/AllCurrencies";
 import { Navbar } from "./components/Navbar";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Dashboard } from "./pages/Dashboard";
+import { Coins } from "./pages/Coins";
 
 function App() {
   return (
-    <div className="w-screen overflow-hidden flex flex-col container mx-auto px-24 mt-12">
-      <Navbar />
-      <AllCurrencies />
-    </div>
+    <BrowserRouter>
+      <div className="w-screen overflow-hidden flex flex-col container mx-auto mt-12">
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/coins/:id' element={<Coins />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
