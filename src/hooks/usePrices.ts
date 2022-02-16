@@ -1,13 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
-import { SingleCurrencyInfo } from "../utils/interfaces"
+import { SingleCurrencyInfo } from "../utils/utils"
 
 export const usePrices = () => {
     const [allCurrencies, setAllCurrencies] = useState<SingleCurrencyInfo[]>([])
     const [currency, setCurrency] = useState<any>()
     
-    const getAllCurrencies = async (page: number) => {
-        const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&price_change_percentage=24h,7d,30d&page=${page}`
+    const getAllCurrencies = async (page: number, vsCurrency: string) => {
+        const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${vsCurrency}&price_change_percentage=24h,7d,30d&page=${page}`
         const response = await axios.get(url)
         setAllCurrencies(response.data)
     }

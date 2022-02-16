@@ -29,3 +29,17 @@ export interface SingleCurrencyInfo {
     total_supply: number,
     total_volume: number
 }
+
+export interface vsCurrencySymbolsType {
+    [key: string]: string
+}
+
+export const vsCurrencySymbols: vsCurrencySymbolsType = {
+    usd: '$',
+    pln: 'zł',
+    eur: '€',
+    btc: 'BTC',
+    eth: 'ETH',
+    gbp: '£',
+    rub: '₽'
+}

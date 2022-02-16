@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useColor } from "../../hooks/useColor"
-import { SingleCurrencyInfo } from "../../utils/interfaces"
+import { SingleCurrencyInfo, vsCurrencySymbols } from "../../utils/utils"
 
 type SingleCurrencyProps = {
-    c: SingleCurrencyInfo
+    c: SingleCurrencyInfo,
+    vscurrency: string
 }
 
-export const SingleCurrency: React.FC<SingleCurrencyProps> = ({ c }) => {
+export const SingleCurrency: React.FC<SingleCurrencyProps> = ({ c, vscurrency }) => {
     const [pricePercentage24h, setPricePercentage24h] = useState<string>('text-secondary')
     const [pricePercentage7d, setPricePercentage7d] = useState<string>('text-primary')
     const [pricePercentage30d, setPricePercentage30d] = useState<string>('text-primary')
@@ -29,7 +30,7 @@ export const SingleCurrency: React.FC<SingleCurrencyProps> = ({ c }) => {
                 </Link>
             </td>
             <td className="text-center">{c?.symbol?.toUpperCase()}</td>
-            <td className="text-center">{c?.current_price}$</td>
+            <td className="text-center">{c?.current_price}{vsCurrencySymbols[vscurrency]}</td>
             <td className={`text-center ${pricePercentage24h}`}>{c?.price_change_percentage_24h?.toFixed(2) || '0.00'}%</td>
             <td className={`text-center ${pricePercentage7d}`}>{c?.price_change_percentage_7d_in_currency?.toFixed(2) || '0.00'}%</td>
             <td className={`text-center ${pricePercentage30d}`}>{c?.price_change_percentage_30d_in_currency?.toFixed(2) || '0.00'}%</td>
