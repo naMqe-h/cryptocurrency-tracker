@@ -1,24 +1,16 @@
 import { useState } from "react"
+import { useSelector } from "react-redux"
 import { AllCurrencies } from "../components/AllCurrencies"
 import { Pagination } from "../components/Pagination"
-import { vsCurrencySymbols } from "../utils/utils"
+import { RootState } from "../redux/store"
 
 export const Dashboard = () => {
     const [page, setPage] = useState<number>(1) //126
-    const [vscurrency, setVsCurrency] = useState<string>('usd')
-
-    const selectCurrencies = Object.keys(vsCurrencySymbols)
+    const vscurrency = useSelector((state: RootState) => state.c.currency)
 
     return (
         <div className="my-10 overflow-x-auto">
-            <div className="mb-6 flex w-full">
-                <div className="flex-1">
-                    <select value={vscurrency} onChange={(e) => setVsCurrency(e.currentTarget.value)} className="select max-w-xs ml-2">
-                        {selectCurrencies.map(item => (
-                            <option key={item} value={item}>{item}</option>
-                        ))}
-                    </select>
-                </div>
+            <div className="mb-6 flex justify-end">
                 <Pagination page={page} setPage={setPage} />
             </div>
             <AllCurrencies vscurrency={vscurrency} page={page} />
